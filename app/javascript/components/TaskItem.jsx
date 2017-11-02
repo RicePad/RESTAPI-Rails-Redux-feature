@@ -5,7 +5,7 @@ class TaskItem extends Component {
 		console.log('TaskItem props', this.props.task)
 		return(
 
-				<div>
+				<div className="task-component-tile">
 					<h3>{this.props.task.title}</h3>
 					<p>{this.props.task.body}</p>
 				</div>

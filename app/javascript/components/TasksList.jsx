@@ -25,7 +25,6 @@ class TasksList extends Component {
 		render(){
 			return(
 				<div>
-					<h1>List of Tasks </h1>
 					<div>
 						{
 							this.state.tasks.map((task, index) => {

@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+.task-component-tile {
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+  background: #fd5c63;
+  float: left;
+  font-size: 11px;
+  text-align: left;
+}

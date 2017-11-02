@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import TaskItem from './TaskItem';
 import axios from 'axios';
 
 class TasksList extends Component {
@@ -26,7 +27,18 @@ class TasksList extends Component {
 				<div>
 					<h1>List of Tasks </h1>
 					<div>
-						
+						{
+							this.state.tasks.map((task, index) => {
+								return(
+									
+									// Create item component and map it.
+									<TaskItem 
+										task={task}
+										key={index}
+									 />
+									)
+							})
+						}
 					</div>
 				</div>
 				)

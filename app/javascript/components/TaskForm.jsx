@@ -26,10 +26,11 @@ class TaskForm extends Component {
       		)
       	.then(response => {
       		console.log(response)
+      		this.props.updateTask(response.data)
       	})
       	.catch(error => console.log(error))
       }
-
+      
 
 
 	render(){

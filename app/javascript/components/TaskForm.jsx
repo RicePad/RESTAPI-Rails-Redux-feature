@@ -34,11 +34,11 @@ class TaskForm extends Component {
 
 	render(){
 		return(
-			<div className="tile">
+			<div className="task-component-tile">
 				<form onBlur={() => this.handleBlur()}>
 					<input
 						type='text'
-						className='input'
+						className="input"
 						placeholder='Enter a title'
 						value={this.state.title}
 						onChange={this.handleInput}

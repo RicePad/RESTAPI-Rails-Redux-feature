@@ -13,6 +13,20 @@
  *= require_tree .
  *= require_self
  */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.App-header {
+  text-align: center;
+  height: 150px;
+  padding: 20px;
+}
+
+.App-intro {
+  font-size: large;
+}
 .task-component-tile {
   height: 150px;
   width: 150px;
@@ -33,6 +47,10 @@
   margin-left: 10px;
   padding:10px;
 }
+
+.form-component{
+  position: block;
+}
 .input {
   border: 0;
   background: none;
@@ -40,4 +58,17 @@
   margin-top:10px;
   width: 140px;
   font-size: 11px;
+}
+.input:focus {
+  border: solid 1px lightgrey;
+}
+
+textarea {
+  resize: none;
+  height: 90px;
+  font-size: 11px;
+}
+
+.tile:hover .deleteButton {
+  visibility: visible;
 }

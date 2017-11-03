@@ -7,7 +7,7 @@ class TaskItem extends Component {
 		return(
 
 				<div className="task-component-tile">
-					<h3>{task.title}</h3>
+					<h4>{task.title}</h4>
 					<p>{task.body}</p>
 				</div>
 			)

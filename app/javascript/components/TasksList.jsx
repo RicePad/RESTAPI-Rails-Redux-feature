@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import TaskItem from './TaskItem';
 import TaskForm from './TaskForm';
+
+import TaskItem from './TaskItem';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import update from 'immutability-helper';
@@ -52,15 +53,17 @@ class TasksList extends Component {
 						> Add Task
 						</button>
 					</div>
-						<div>
+					
 						 {this.state.tasks.map((task) => {
 					          if(this.state.taskId === task.id) {
-					            return(<TaskForm task={task} key={task.id} />)
+					            return(
+					            	<TaskForm task={task} key={task.id} />
+					            )
 					          } else {
 					            return (<TaskItem task={task} key={task.id} />)
 					          }
 					        })}
-						 </div>
+						 
 				</div>
 				)
 		}

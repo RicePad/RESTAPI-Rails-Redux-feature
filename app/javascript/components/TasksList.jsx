@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TaskItem from './TaskItem';
+import TaskForm from './TaskForm';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import update from 'immutability-helper';
@@ -12,7 +13,8 @@ class TasksList extends Component {
 			super(props);
 
 			this.state = {
-				tasks: []
+				tasks: [],
+				taskId: null
 			}
 		}
 	
@@ -34,7 +36,7 @@ class TasksList extends Component {
 		     	const tasks = update(this.state.tasks, { $splice: [[0, 0, response.data]]})
 		        console.log(response)
 
-		        this.setState({tasks: tasks})
+		        this.setState({tasks: tasks, taskId: response.data.id})
 		    })
 		    .catch(error => console.log(error))
   }
@@ -50,20 +52,15 @@ class TasksList extends Component {
 						> Add Task
 						</button>
 					</div>
-					<div>
-						
-						{
-							this.state.tasks.map((task, index) => {
-								return(
-									<TaskItem 
-										task={task} 
-										key={index}
-									/>
-									)
-							})
-
-						}
-					</div>
+						<div>
+						 {this.state.tasks.map((task) => {
+					          if(this.state.taskId === task.id) {
+					            return(<TaskForm task={task} key={task.id} />)
+					          } else {
+					            return (<TaskItem task={task} key={task.id} />)
+					          }
+					        })}
+						 </div>
 				</div>
 				)
 		}

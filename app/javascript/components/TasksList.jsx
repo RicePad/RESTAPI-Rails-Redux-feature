@@ -23,7 +23,7 @@ class TasksList extends Component {
 		componentDidMount() {
 			axios.get('http://localhost:5000/api/v1/tasks.json')
 				.then(response => {
-					// console.log(response)
+					console.log(response)
 					this.setState({tasks: response.data})
 				})
 
@@ -50,7 +50,7 @@ class TasksList extends Component {
 
 		render(){
 			// console.log('this.props-xx', this.props)
-			console.log(this.state)
+			console.log('this.state', this.state)
 			return(
 				<div>
 					<div>

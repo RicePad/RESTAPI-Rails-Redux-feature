@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 
 class TaskItem extends Component {
 	render(){
-		console.log('TaskItem props', this.props.task)
+		// console.log('TaskItem props', this.props)
+		let task = this.props.task;	
 		return(
 
 				<div className="task-component-tile">
-					<h3>{this.props.task.title}</h3>
-					<p>{this.props.task.body}</p>
+					<h3>{task.title}</h3>
+					<p>{task.body}</p>
 				</div>
 			)
 	}

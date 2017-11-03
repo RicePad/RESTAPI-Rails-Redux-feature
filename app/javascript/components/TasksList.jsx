@@ -25,7 +25,14 @@ class TasksList extends Component {
 					<div>
 						
 						{
-
+							this.props.fetchTasks.map((task, index) => {
+								return(
+									<TaskItem 
+										task={task} 
+										key={index}
+									/>
+									)
+							})
 
 						}
 					</div>

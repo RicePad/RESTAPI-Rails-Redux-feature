@@ -17,28 +17,32 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #026AA7;
 }
 .App-header {
   text-align: center;
   height: 150px;
   padding: 20px;
+  color: white;
 }
 
 .App-intro {
   font-size: large;
 }
 .task-component-tile {
-  height: 150px;
+      border-radius: 15px;
+
   width: 150px;
+  height: 150px;
   margin: 10px;
-  background: #fd5c63;
+  background: #fff;
   float: left;
   font-size: 11px;
   text-align: left;
 }
 
 .addTaskButton {
-  background: darkblue;
+  background: #5CB85C;
   color: white;
   border: none;
   font-size: 18px;
@@ -68,7 +72,16 @@ textarea {
   height: 90px;
   font-size: 11px;
 }
+.deleteButton {
+    visibility: visible;
 
-.tile:hover .deleteButton {
+  float: right;
+  margin: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #5CB85C;
+}
+.tile:hover  {
   visibility: visible;
 }
+

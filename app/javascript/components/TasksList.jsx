@@ -54,6 +54,21 @@ class TasksList extends Component {
   		this.setState({notification: ''})
   	}
 
+
+  	  enableEditing = (id) => {
+   		 this.setState({taskId: id})
+  }
+
+  	deleteTask = (id) => {
+  		 axios.delete(`http://localhost:5000/api/v1/tasks/${id}`)
+	    .then(response => {
+	      const taskIndex = this.state.tasks.findIndex(x => x.id === id)
+	      const tasks = update(this.state.tasks, { $splice: [[taskIndex, 1]]})
+	      this.setState({tasks: tasks})
+	    })
+	    .catch(error => console.log(error))
+
+  	}
   	
 
 		render(){
@@ -78,7 +93,7 @@ class TasksList extends Component {
 					            	<TaskForm task={task} key={task.id} updateTask={this.updateTask} resetNotification={this.resetNotification} />
 					            )
 					          } else {
-					            return (<TaskItem task={task} key={task.id} />)
+					            return (<TaskItem task={task} key={task.id} onClick={this.enableEditing} onDelete={this.deleteTask}/>)
 					          }
 					        })}
 						 

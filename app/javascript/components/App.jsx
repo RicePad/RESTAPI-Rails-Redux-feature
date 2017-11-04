@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import TasksList from './TasksList';
 
 class App extends Component {
-		
+
 
 	render(){
 		return(
@@ -10,10 +10,12 @@ class App extends Component {
 				<div className="App-header">
 					<h1>SmartBoard Application</h1>
 				</div>
+				
 				<TasksList />
 			</div>
 			)
 	}
 }
+
 
 export default App;

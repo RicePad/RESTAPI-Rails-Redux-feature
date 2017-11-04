@@ -15,7 +15,8 @@ class TasksList extends Component {
 
 			this.state = {
 				tasks: [],
-				taskId: null
+				taskId: null,
+				notification: ''
 			}
 		}
 	
@@ -45,8 +46,15 @@ class TasksList extends Component {
   	updateTask = (task) => {
   		const taskIndex = this.state.tasks.findIndex(x => x.id === task.id)
   		const tasks = update(this.state.tasks, {[taskIndex]: {$set: task }})
-  		this.setState({tasks: tasks})
+  		this.setState({tasks: tasks, notification: 'All Changes Saved'})
   	}
+
+
+  	resetNotification = () => {
+  		this.setState({notification: ''})
+  	}
+
+  	
 
 		render(){
 			// console.log('this.props-xx', this.props)
@@ -59,12 +67,15 @@ class TasksList extends Component {
 							onClick={this.addTask}
 						> Add Task
 						</button>
+						<span>
+							{this.state.notification}
+						</span>
 					</div>
 					
 						 {this.state.tasks.map((task) => {
 					          if(this.state.taskId === task.id) {
 					            return(
-					            	<TaskForm task={task} key={task.id} updateTask={this.updateTask} />
+					            	<TaskForm task={task} key={task.id} updateTask={this.updateTask} resetNotification={this.resetNotification} />
 					            )
 					          } else {
 					            return (<TaskItem task={task} key={task.id} />)

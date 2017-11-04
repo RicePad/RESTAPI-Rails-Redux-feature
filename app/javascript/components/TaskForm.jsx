@@ -14,6 +14,7 @@ class TaskForm extends Component {
 
 
 	  handleInput = (event) => {
+	  	this.props.resetNotification()
     	this.setState({[event.target.name]: event.target.value})
       }
 

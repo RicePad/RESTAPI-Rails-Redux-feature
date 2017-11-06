@@ -1,3 +1,4 @@
+import axios from 'axios';
 export const RECIEVE_ALL_TASKS = 'RECIEVE_ALL_TASKS';
 export const NEW_TASK = 'NEW_TASK';
 
@@ -35,4 +36,26 @@ function newTask(task) {
 		task
 	}
 	return action
+}
+
+
+funtion postTaskJson(params){
+			axios.post('http://localhost:5000/api/v1/tasks', {task: {title: '', body: ''}})
+		    .then(response => {
+		     	const tasks = update(this.state.tasks, { $splice: [[0, 0, response.data]]})
+		        console.log(response)
+
+		        this.setState({tasks: tasks, taskId: response.data.id})
+		    })
+		    .catch(error => console.log(error))	
+}
+
+
+
+
+export function createTask(task){
+	return function(dispatch){
+		return postTaskJson()
+			.then(json => dispatch(task))
+	}
 }

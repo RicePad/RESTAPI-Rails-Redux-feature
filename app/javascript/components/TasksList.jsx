@@ -3,8 +3,12 @@ import TaskForm from './TaskForm';
 
 import TaskItem from './TaskItem';
 import axios from 'axios';
-import { connect } from 'react-redux';
 import update from 'immutability-helper';
+
+// #POST REQUEST
+import { createTask } from '../actions';
+import { connect } from 'react-redux';
+import { fetchTasks } from '../actions';
 
 
 
@@ -19,26 +23,38 @@ class TasksList extends Component {
 				notification: ''
 			}
 		}
-	
 
-		componentDidMount() {
-			axios.get('http://localhost:5000/api/v1/tasks.json')
-				.then(response => {
-					console.log(response)
-					this.setState({tasks: response.data})
-				})
+		
+		// postTask(){
+		// 	const taskObj = {
+		// 		title: '',
+		// 		body: ''
+		// 	}
 
-				.catch(error => console.log(error))
-		}
+		// 	this.props.createTask(taskObj)
+		// }
+
+		// componentDidMount() {
+		// 	axios.get('http://localhost:5000/api/v1/tasks.json')
+		// 		.then(response => {
+		// 			console.log(response)
+		// 			this.setState({tasks: response.data})
+		// 		})
+
+		// 		.catch(error => console.log(error))
+		// }
+
 
 
 		addTask = () => {
-		    axios.post('http://localhost:5000/api/v1/tasks', {task: {title: '', body: ''}})
+		    axios.post('http://localhost:5000/api/v1/tasks', {task: {title: 'hello world', body: 'hello'}})
 		    .then(response => {
-		     	const tasks = update(this.state.tasks, { $splice: [[0, 0, response.data]]})
+		     	// const tasks = update(this.state.tasks, { $splice: [[0, 0, response.data]]})
 		        console.log(response)
 
-		        this.setState({tasks: tasks, taskId: response.data.id})
+		        // this.setState({tasks: tasks, taskId: response.data.id})
+
+		          this.props.createTask()
 		    })
 		    .catch(error => console.log(error))
   }
@@ -71,32 +87,28 @@ class TasksList extends Component {
   	}
   	
 
+
+
 		render(){
 			// console.log('this.props-xx', this.props)
-			console.log('this.state', this.state)
+			// console.log('this.state', this.state)
 			return(
 				<div>
 					<div>
 						<button 
 							className="addTaskButton"
-							onClick={this.addTask}
+							onClick={this.renderTaskForm}
 						> Add Task
 						</button>
+						
+						
 						<span>
 							{this.state.notification}
 						</span>
+						<div>
+							<TaskForm task={this.props.myTasks} />
+						</div>
 					</div>
-					
-						 {this.state.tasks.map((task) => {
-					          if(this.state.taskId === task.id) {
-					            return(
-					            	<TaskForm task={task} key={task.id} updateTask={this.updateTask} resetNotification={this.resetNotification} />
-					            )
-					          } else {
-					            return (<TaskItem task={task} key={task.id} onClick={this.enableEditing} onDelete={this.deleteTask}/>)
-					          }
-					        })}
-						 
 				</div>
 				)
 		}
@@ -105,10 +117,11 @@ class TasksList extends Component {
 
 function mapStateToProps(state){
 	return {
-			fetchTasks: state.fetchTasks
+			fetchTasks: state.fetchTasks,
+			myTasks: state.myTasks
 	}
 }
 
 
 
-export default connect(mapStateToProps)(TasksList);
+export default connect(mapStateToProps, { createTask })(TasksList);

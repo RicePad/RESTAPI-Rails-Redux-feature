@@ -18,40 +18,36 @@ class TaskForm extends Component {
     	this.setState({[event.target.name]: event.target.value})
       }
 
-      handleBlur(){	
-      	const task = {title: this.state.title, body: this.state.body}
+      // handleBlur(){	
+      // 	const task = {title: this.state.title, body: this.state.body}
 
-      	axios.put(
-      		`http://localhost:5000/api/v1/tasks/${this.props.task.id}`,
-      		{task: task}
-      		)
-      	.then(response => {
-      		console.log(response)
-      		this.props.updateTask(response.data)
-      	})
-      	.catch(error => console.log(error))
-      }
+      // 	axios.put(
+      // 		`http://localhost:5000/api/v1/tasks/${this.props.task.id}`,
+      // 		{task: task}
+      // 		)
+      // 	.then(response => {
+      // 		console.log(response)
+      // 		this.props.updateTask(response.data)
+      // 	})
+      // 	.catch(error => console.log(error))
+      // }
 
 
 
 	render(){
 		return(
 			<div className="task-component-tile">
-				<form onBlur={() => this.handleBlur()}>
+				<form>
 					<input
 						type='text'
 						className="input"
 						placeholder='Enter a title'
-						value={this.state.title}
-						onChange={this.handleInput}
 						name="title"
 					 />
 					<textarea
 						type='text'
 						className="input"
 						placeholder="Enter your task"
-						value={this.state.body}
-						onChange={this.handleInput}
 						name="body"
 					> 
 					</textarea>

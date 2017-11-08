@@ -30,7 +30,7 @@ export function fetchTasks(){
 
 // ******************* POST REQUEST ACTION *******************
 
-function newTask(task) {
+function newTask(task){
 	const action = {
 		type: NEW_TASK,
 		task
@@ -39,23 +39,40 @@ function newTask(task) {
 }
 
 
-funtion postTaskJson(params){
-			axios.post('http://localhost:5000/api/v1/tasks', {task: {title: '', body: ''}})
-		    .then(response => {
-		     	const tasks = update(this.state.tasks, { $splice: [[0, 0, response.data]]})
-		        console.log(response)
+// function postTaskJson(){
+// 			axios.post('http://localhost:5000/api/v1/tasks', {task: {title: 'i just wrote this111', body: 'i just wrote thi111s'}})
+// 		    .then(response => {
+// 		    	console.log(response)
+// 		    	response.json()
+// 		    })	
+// 		    .catch(error => console.log(error))
 
-		        this.setState({tasks: tasks, taskId: response.data.id})
-		    })
-		    .catch(error => console.log(error))	
-}
-
+// }
 
 
 
-export function createTask(task){
-	return function(dispatch){
-		return postTaskJson()
-			.then(json => dispatch(task))
-	}
-}
+
+export function createTask() {
+	return(dispatch) => {
+		return axios.post('http://localhost:5000/api/v1/tasks', {task: {title: 'REDUX HUMBLY', body: 'REDUX HUMBLY'}})
+			.then(response => {
+				dispatch(newTask(response.data))
+			})
+			.catch(error => console.log(error))
+
+}}
+
+// export function createTask(new_task_object){
+// 	return function(dispatch){
+
+// 		return postTaskJson()
+// 			.then(new_task => dispatch(newTask(new_Task)))
+// 	}
+// }
+
+// export function createTask(){
+// 	return function(dispatch){
+// 		return postTaskJson()
+// 			.then(json => dispatch(task))
+// 	}
+// 

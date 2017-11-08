@@ -25,15 +25,7 @@ class TasksList extends Component {
 		}
 
 		
-		// postTask(){
-		// 	const taskObj = {
-		// 		title: '',
-		// 		body: ''
-		// 	}
-
-		// 	this.props.createTask(taskObj)
-		// }
-
+		
 		// componentDidMount() {
 		// 	axios.get('http://localhost:5000/api/v1/tasks.json')
 		// 		.then(response => {
@@ -47,14 +39,12 @@ class TasksList extends Component {
 
 
 		addTask = () => {
-		    axios.post('http://localhost:5000/api/v1/tasks', {task: {title: 'hello world', body: 'hello'}})
+		    axios.post('http://localhost:5000/api/v1/tasks', {task: {title: '', body: ''}})
 		    .then(response => {
-		     	// const tasks = update(this.state.tasks, { $splice: [[0, 0, response.data]]})
+		     	const tasks = update(this.props.tasks, { $splice: [[0, 0, response.data]]})
 		        console.log(response)
 
-		        // this.setState({tasks: tasks, taskId: response.data.id})
-
-		          this.props.createTask()
+		        this.setState({tasks: tasks, taskId: response.data.id})
 		    })
 		    .catch(error => console.log(error))
   }
@@ -97,16 +87,22 @@ class TasksList extends Component {
 					<div>
 						<button 
 							className="addTaskButton"
-							onClick={this.renderTaskForm}
+							onClick={this.addTask}
 						> Add Task
 						</button>
-						
+						<div>
+							<TaskForm task={this.state.tasks} updateTask={this.updateTask}  />
+						</div>
 						
 						<span>
 							{this.state.notification}
 						</span>
 						<div>
-							<TaskForm />
+							{this.props.fetchTasks.map((task, index) => {
+								return(
+										<TaskItem task={task} key={task.id} />
+									)
+							})}
 						</div>
 					</div>
 				</div>

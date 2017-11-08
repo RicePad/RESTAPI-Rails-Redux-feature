@@ -9,42 +9,32 @@ class TaskForm extends Component {
 		super(props);
 		
 		this.state = {
-			title: '',
-			body: ''
+			title: this.props.task.title,
+			body: this.props.task.body
 		}
 	}
 
 
-	 pushTask() {
-			return(dispatch) => {
-				return axios.post('http://localhost:5000/api/v1/tasks', {task: {title: this.setState((event) => {title: event.target.value}), body: this.setState((event) => {body: event.target.value})}})
-					.then(response => {
-						dispatch(this.props.createTask(response.data))
+	 
+	
+	handleInput = (event) => {
+		this.setState({[event.target.name]: event.target.value})
 
+	}
 
-					})
-					.catch(error => console.log(error))
+	handleBlur =() => {	
+      	const task = {title: this.state.title, body: this.state.body}
 
-}}
-	  // handleInput = (event) => {
-	  // 	this.props.resetNotification()
-   //  	this.setState({[event.target.name]: event.target.value})
-   //    }
-
-      // handleBlur(){	
-      // 	const task = {title: this.state.title, body: this.state.body}
-
-      // 	axios.put(
-      // 		`http://localhost:5000/api/v1/tasks/${this.props.task.id}`,
-      // 		{task: task}
-      // 		)
-      // 	.then(response => {
-      // 		console.log(response)
-      // 		this.props.updateTask(response.data)
-      // 	})
-      // 	.catch(error => console.log(error))
-      // }
-
+      	axios.put(
+      		`http://localhost:5000/api/v1/tasks/${this.props.task.id}`,
+      		{task: task}
+      		)
+      	.then(response => {
+      		console.log(response)
+      		this.props.updateTask(response.data)
+      	})
+      	.catch(error => console.log(error))
+      }
 
 
 
@@ -54,25 +44,25 @@ class TaskForm extends Component {
 		return(
 			<div className="task-component-tile">
 				
+					<form onBlur={this.handleBlur}>
 					<input
 						type='text'
 						className="input"
 						placeholder='Enter a title'
 						name="title"
-						onChange={(event) => this.setState({title: event.target.value})}
+						onChange={this.handleInput}
 					 />
 					<textarea
 						type='text'
 						className="input"
 						placeholder="Enter your task"
 						name="body"
-						onChange={(event) => this.setState({body: event.target.value})}
+						onChange={this.handleInput}
 
 					> 
 					</textarea>
-					<button
-						onClick={() => this.props.createTask()}
-					>Save</button>
+					</form>
+					
 				
 			</div>
 			)

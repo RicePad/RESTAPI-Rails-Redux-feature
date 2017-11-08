@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 class TaskItem extends Component {
+<<<<<<< HEAD
 	
 	handleClick(){
 	 	{this.props.onClick(this.props.task.id)}
@@ -23,12 +24,15 @@ class TaskItem extends Component {
 
 	
 
+=======
+>>>>>>> parent of 504aa17... add DELETE method using axios
 	render(){
 		// console.log('TaskItem props', this.props)
 		let task = this.props.task;	
 		console.log('TaskItem props', this.props.createTask)
 		return(
 
+<<<<<<< HEAD
 				<div 
 				 className="task-component-tile"
 				 // onClick={() => this.postTask()}
@@ -37,6 +41,11 @@ class TaskItem extends Component {
 					<span className="deleteButton" onClick={() => this.handleDelete()}>X</span>
 					<h4 onClick={() => this.handleClick()}>{task.title}</h4>
 					<p onClick={() => this.handleClick()}>{task.body}</p>
+=======
+				<div className="task-component-tile">
+					<h4>{task.title}</h4>
+					<p>{task.body}</p>
+>>>>>>> parent of 504aa17... add DELETE method using axios
 				</div>
 			)
 	}

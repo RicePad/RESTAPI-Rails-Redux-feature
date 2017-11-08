@@ -106,7 +106,7 @@ class TasksList extends Component {
 							{this.state.notification}
 						</span>
 						<div>
-							<TaskForm task={this.props.myTasks} />
+							<TaskForm />
 						</div>
 					</div>
 				</div>

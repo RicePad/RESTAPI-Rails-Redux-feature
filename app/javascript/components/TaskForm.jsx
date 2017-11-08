@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import { connect } from 'react-redux';
+import { createTask } from '../actions';
 
 
 class TaskForm extends Component {
@@ -7,16 +9,16 @@ class TaskForm extends Component {
 		super(props);
 		
 		this.state = {
-			title: this.props.task.title,
-			body: this.props.task.body
+			title: '',
+			body: ''
 		}
 	}
 
 
-	  handleInput = (event) => {
-	  	this.props.resetNotification()
-    	this.setState({[event.target.name]: event.target.value})
-      }
+	  // handleInput = (event) => {
+	  // 	this.props.resetNotification()
+   //  	this.setState({[event.target.name]: event.target.value})
+   //    }
 
       // handleBlur(){	
       // 	const task = {title: this.state.title, body: this.state.body}
@@ -34,27 +36,36 @@ class TaskForm extends Component {
 
 
 
+
+
+
 	render(){
 		return(
 			<div className="task-component-tile">
-				<form>
+				
 					<input
 						type='text'
 						className="input"
 						placeholder='Enter a title'
 						name="title"
+						onChange={(event) => this.setState({title: event.target.value})}
 					 />
 					<textarea
 						type='text'
 						className="input"
 						placeholder="Enter your task"
 						name="body"
+						onChange={(event) => this.setState({body: event.target.value})}
+
 					> 
 					</textarea>
-				</form>
+					<button
+						onClick={() => this.props.createTask()}
+					>Save</button>
+				
 			</div>
 			)
 	}
 }
 
-export default TaskForm;
+export default connect(null, { createTask })(TaskForm);

@@ -57,7 +57,8 @@ export function createTask() {
 		return axios.post('http://localhost:5000/api/v1/tasks', {task: {title: '', body: ''}})
 			.then(response => {
 				dispatch(newTask(response.data))
-				
+
+
 			})
 			.catch(error => console.log(error))
 

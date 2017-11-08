@@ -15,6 +15,17 @@ class TaskForm extends Component {
 	}
 
 
+	 pushTask() {
+			return(dispatch) => {
+				return axios.post('http://localhost:5000/api/v1/tasks', {task: {title: this.setState((event) => {title: event.target.value}), body: this.setState((event) => {body: event.target.value})}})
+					.then(response => {
+						dispatch(this.props.createTask(response.data))
+
+
+					})
+					.catch(error => console.log(error))
+
+}}
 	  // handleInput = (event) => {
 	  // 	this.props.resetNotification()
    //  	this.setState({[event.target.name]: event.target.value})

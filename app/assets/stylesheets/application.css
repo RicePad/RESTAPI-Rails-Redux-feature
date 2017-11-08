@@ -1,44 +1,33 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- *= require_tree .
- *= require_self
- */
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  background-color: #026AA7;
 }
 .App-header {
   text-align: center;
   height: 150px;
   padding: 20px;
+  color: white;
 }
 
 .App-intro {
   font-size: large;
 }
 .task-component-tile {
-  height: 150px;
+      border-radius: 15px;
+
   width: 150px;
+  height: 150px;
   margin: 10px;
-  background: #fd5c63;
+  background: #fff;
   float: left;
   font-size: 11px;
   text-align: left;
 }
 
 .addTaskButton {
-  background: darkblue;
+  background: #5CB85C;
   color: white;
   border: none;
   font-size: 18px;
@@ -68,7 +57,15 @@ textarea {
   height: 90px;
   font-size: 11px;
 }
+.deleteButton {
+    visibility: visible;
 
-.tile:hover .deleteButton {
+  float: right;
+  margin: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #5CB85C;
+}
+.tile:hover  {
   visibility: visible;
 }

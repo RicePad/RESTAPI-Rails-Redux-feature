@@ -3,12 +3,8 @@ import TaskForm from './TaskForm';
 
 import TaskItem from './TaskItem';
 import axios from 'axios';
-import update from 'immutability-helper';
-
-// #POST REQUEST
-import { createTask } from '../actions';
 import { connect } from 'react-redux';
-import { fetchTasks } from '../actions';
+import update from 'immutability-helper';
 
 
 
@@ -23,25 +19,23 @@ class TasksList extends Component {
 				notification: ''
 			}
 		}
+	
 
-		
-		
-		// componentDidMount() {
-		// 	axios.get('http://localhost:5000/api/v1/tasks.json')
-		// 		.then(response => {
-		// 			console.log(response)
-		// 			this.setState({tasks: response.data})
-		// 		})
+		componentDidMount() {
+			axios.get('http://localhost:5000/api/v1/tasks.json')
+				.then(response => {
+					console.log(response)
+					this.setState({tasks: response.data})
+				})
 
-		// 		.catch(error => console.log(error))
-		// }
-
+				.catch(error => console.log(error))
+		}
 
 
 		addTask = () => {
 		    axios.post('http://localhost:5000/api/v1/tasks', {task: {title: '', body: ''}})
 		    .then(response => {
-		     	const tasks = update(this.props.tasks, { $splice: [[0, 0, response.data]]})
+		     	const tasks = update(this.state.tasks, { $splice: [[0, 0, response.data]]})
 		        console.log(response)
 
 		        this.setState({tasks: tasks, taskId: response.data.id})
@@ -60,13 +54,26 @@ class TasksList extends Component {
   		this.setState({notification: ''})
   	}
 
+
+  	  enableEditing = (id) => {
+   		 this.setState({taskId: id})
+  }
+
+  	deleteTask = (id) => {
+  		 axios.delete(`http://localhost:5000/api/v1/tasks/${id}`)
+	    .then(response => {
+	      const taskIndex = this.state.tasks.findIndex(x => x.id === id)
+	      const tasks = update(this.state.tasks, { $splice: [[taskIndex, 1]]})
+	      this.setState({tasks: tasks})
+	    })
+	    .catch(error => console.log(error))
+
+  	}
   	
-
-
 
 		render(){
 			// console.log('this.props-xx', this.props)
-			// console.log('this.state', this.state)
+			console.log('this.state', this.state)
 			return(
 				<div>
 					<div>
@@ -75,23 +82,10 @@ class TasksList extends Component {
 							onClick={this.addTask}
 						> Add Task
 						</button>
-						<div>
-							<TaskForm task={this.state.tasks} updateTask={this.updateTask}  />
-						</div>
-						
 						<span>
 							{this.state.notification}
 						</span>
-						<div>
-							{this.props.fetchTasks.map((task, index) => {
-								return(
-										<TaskItem task={task} key={task.id} />
-									)
-							})}
-						</div>
 					</div>
-<<<<<<< HEAD
-=======
 					
 						 {this.state.tasks.map((task) => {
 					          if(this.state.taskId === task.id) {
@@ -99,11 +93,10 @@ class TasksList extends Component {
 					            	<TaskForm task={task} key={task.id} updateTask={this.updateTask} resetNotification={this.resetNotification} />
 					            )
 					          } else {
-					            return (<TaskItem task={task} key={task.id} />)
+					            return (<TaskItem task={task} key={task.id} onClick={this.enableEditing} onDelete={this.deleteTask}/>)
 					          }
 					        })}
 						 
->>>>>>> parent of 504aa17... add DELETE method using axios
 				</div>
 				)
 		}
@@ -112,11 +105,10 @@ class TasksList extends Component {
 
 function mapStateToProps(state){
 	return {
-			fetchTasks: state.fetchTasks,
-			myTasks: state.myTasks
+			fetchTasks: state.fetchTasks
 	}
 }
 
 
 
-export default connect(mapStateToProps, { createTask })(TasksList);
+export default connect(mapStateToProps)(TasksList);

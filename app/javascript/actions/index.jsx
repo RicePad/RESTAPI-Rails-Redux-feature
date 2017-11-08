@@ -1,3 +1,4 @@
+import axios from 'axios';
 export const RECIEVE_ALL_TASKS = 'RECIEVE_ALL_TASKS';
 export const NEW_TASK = 'NEW_TASK';
 
@@ -29,56 +30,32 @@ export function fetchTasks(){
 
 // ******************* POST REQUEST ACTION *******************
 
-function newTask(task){
+function newTask(task) {
 	const action = {
 		type: NEW_TASK,
 		task
 	}
 	return action
-<<<<<<< HEAD
 }
 
 
-// function postTaskJson(){
-// 			axios.post('http://localhost:5000/api/v1/tasks', {task: {title: 'i just wrote this111', body: 'i just wrote thi111s'}})
-// 		    .then(response => {
-// 		    	console.log(response)
-// 		    	response.json()
-// 		    })	
-// 		    .catch(error => console.log(error))
+function postTaskJson(params){
+			axios.post('http://localhost:5000/api/v1/tasks', {task: {title: '', body: ''}})
+		    .then(response => {
+		     	const tasks = update(this.state.tasks, { $splice: [[0, 0, response.data]]})
+		        console.log(response)
 
-// }
-
-
-
-
-export function createTask() {
-	return(dispatch) => {
-		return axios.post('http://localhost:5000/api/v1/tasks', {task: {title: '', body: ''}})
-			.then(response => {
-				dispatch(newTask(response.data))
-
-
-			})
-			.catch(error => console.log(error))
-
-}}
-
-
-// export function createTask(new_task_object){
-// 	return function(dispatch){
-
-// 		return postTaskJson()
-// 			.then(new_task => dispatch(newTask(new_Task)))
-// 	}
-// }
-
-// export function createTask(){
-// 	return function(dispatch){
-// 		return postTaskJson()
-// 			.then(json => dispatch(task))
-// 	}
-// 
-=======
+		        this.setState({tasks: tasks, taskId: response.data.id})
+		    })
+		    .catch(error => console.log(error))	
 }
->>>>>>> parent of 88fe140... Post rquest action logic added
+
+
+
+
+export function createTask(task){
+	return function(dispatch){
+		return postTaskJson()
+			.then(json => dispatch(task))
+	}
+}

@@ -22,7 +22,7 @@ class TaskForm extends Component {
       	const task = {title: this.state.title, body: this.state.body}
 
       	axios.put(
-      		`http://localhost:5000/api/v1/tasks/${this.props.task.id}`,
+      		`https://ricepad-smartboard.herokuapp.com/api/v1/tasks/${this.props.task.id}`,
       		{task: task}
       		)
       	.then(response => {

@@ -40,7 +40,7 @@ function newTask(task) {
 
 
 function postTaskJson(params){
-			axios.post('http://localhost:5000/api/v1/tasks', {task: {title: '', body: ''}})
+			axios.post('https://ricepad-smartboard.herokuapp.com/api/v1/tasks.json', {task: {title: '', body: ''}})
 		    .then(response => {
 		     	const tasks = update(this.state.tasks, { $splice: [[0, 0, response.data]]})
 		        console.log(response)

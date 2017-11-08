@@ -1,4 +1,3 @@
-import axios from 'axios';
 export const RECIEVE_ALL_TASKS = 'RECIEVE_ALL_TASKS';
 export const NEW_TASK = 'NEW_TASK';
 
@@ -36,6 +35,7 @@ function newTask(task){
 		task
 	}
 	return action
+<<<<<<< HEAD
 }
 
 
@@ -79,3 +79,6 @@ export function createTask() {
 // 			.then(json => dispatch(task))
 // 	}
 // 
+=======
+}
+>>>>>>> parent of 88fe140... Post rquest action logic added

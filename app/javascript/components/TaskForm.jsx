@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import { ROOT_URL } from './TaskList';
 
 
 class TaskForm extends Component {
@@ -22,7 +23,7 @@ class TaskForm extends Component {
       	const task = {title: this.state.title, body: this.state.body}
 
       	axios.put(
-      		`http://localhost:5000/api/v1/tasks/${this.props.task.id}`,
+      		`${ROOT_URL}/${this.props.task.id}`,
       		{task: task}
       		)
       	.then(response => {

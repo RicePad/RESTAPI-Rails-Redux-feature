@@ -7,8 +7,8 @@ import { connect } from 'react-redux';
 import update from 'immutability-helper';
 
 
-const ROOT_URL = "https://ricepad-smartboard.herokuapp.com/api/v1/tasks"
-// const ROOT_URL = "http://localhost:5000/api/v1/tasks.json"
+export const ROOT_URL = "https://ricepad-smartboard.herokuapp.com/api/v1/tasks"
+// export const ROOT_URL = "http://localhost:5000/api/v1/tasks"
 
 class TasksList extends Component {
 		constructor(props){

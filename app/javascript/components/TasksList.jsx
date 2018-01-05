@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import update from 'immutability-helper';
 
 
-
+const ROOT_URL = "https://ricepad-smartboard.herokuapp.com/api/v1/tasks"
+// const ROOT_URL = "http://localhost:5000/api/v1/tasks.json"
 
 class TasksList extends Component {
 		constructor(props){
@@ -22,7 +23,7 @@ class TasksList extends Component {
 	
 
 		componentDidMount() {
-			axios.get('http://localhost:5000/api/v1/tasks.json')
+			axios.get(`${ROOT_URL}`)
 				.then(response => {
 					console.log(response)
 					this.setState({tasks: response.data})
@@ -33,7 +34,7 @@ class TasksList extends Component {
 
 
 		addTask = () => {
-		    axios.post('http://localhost:5000/api/v1/tasks', {task: {title: '', body: ''}})
+		    axios.post(`${ROOT_URL}`, {task: {title: '', body: ''}})
 		    .then(response => {
 		     	const tasks = update(this.state.tasks, { $splice: [[0, 0, response.data]]})
 		        console.log(response)
@@ -60,7 +61,7 @@ class TasksList extends Component {
   }
 
   	deleteTask = (id) => {
-  		 axios.delete(`http://localhost:5000/api/v1/tasks/${id}`)
+  		 axios.delete(`${ROOT_URL}/${id}`)
 	    .then(response => {
 	      const taskIndex = this.state.tasks.findIndex(x => x.id === id)
 	      const tasks = update(this.state.tasks, { $splice: [[taskIndex, 1]]})
